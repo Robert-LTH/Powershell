@@ -11,7 +11,13 @@ function Get-ComputerName {
         $BIOSInfo = Get-WmiObject -ErrorAction SilentlyContinue -Namespace root\cimv2 -Class Win32_BIOS -Property SerialNumber,Manufacturer
         $SerialNumber = $BIOSInfo | Select-Object -ExpandProperty SerialNumber
         # Actual manufacturer does not fit a dnsname, replace with short name
-        $Manufacturer = $BIOSInfo | Select-Object -ExpandProperty Manufacturer | % { $_ -replace 'Hewlett-Packard','HP' -replace 'Dell Inc.','DELL' }
+        $Manufacturer = $BIOSInfo | Select-Object -ExpandProperty Manufacturer | % {
+            $_ -replace 'Hewlett-Packard','HP' `
+            -replace 'Dell Inc.','DELL' `
+            -replace 'Microsoft Corporation','MS' `
+            -replace 'Sony Corporation','SONY' `
+            -replace 'LENOVO','LNVO'
+        } | Where-Object { $_ -notmatch ' ' }
         # We need to check the length, build final name here
         $SerialNumberAndManufacturer = "$($Manufacturer)-$($SerialNumber)"
         # If we have all data and its less than the maximum length, use it
