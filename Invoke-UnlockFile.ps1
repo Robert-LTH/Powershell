@@ -51,7 +51,6 @@ function Invoke-UnlockFile {
         $ACLSaveProc = Start-Process @BaseParameters -FilePath "$SystemRoot\icacls.exe" -ArgumentList "$Path /save $OriginalACLPath"
         if ($ACLSaveProc.ExitCode -ne 0) {
             # We failed, Restore owner
-            Write-CMLogEntry -Severity 1 -Value "Restoring old owner on '$Path'"
             $SetownProc = Start-Process @BaseParameters -FilePath "$SystemRoot\icacls.exe" -ArgumentList "$Path /setowner `"$OriginalOwner`""
             if ($SetownProc.ExitCode -ne 0) {
                 Write-Error "Could not restore owner to '$OriginalOwner'!"
@@ -64,7 +63,6 @@ function Invoke-UnlockFile {
         $GrantProc = Start-Process @BaseParameters -FilePath "$SystemRoot\icacls.exe" -ArgumentList "$Path /Grant $($CurrentUser):(F)"
         if ($GrantProc.ExitCode -ne 0) {
             # We failed, Restore owner
-            Write-CMLogEntry -Severity 1 -Value "Restoring old owner on '$Path'"
             $SetownProc = Start-Process @BaseParameters -FilePath "$SystemRoot\icacls.exe" -ArgumentList "$Path /setowner `"$OriginalOwner`""
             if ($SetownProc.ExitCode -ne 0) {
                 Write-Error "Could not restore owner to '$OriginalOwner'!"
