@@ -17,7 +17,7 @@ function Get-ComputerName {
             -replace 'Microsoft Corporation','MS' `
             -replace 'Sony Corporation','SONY' `
             -replace 'LENOVO','LNVO'
-        } | Where-Object { $_ -notmatch ' ' }
+        } | Where-Object { $_ -notmatch ' ' } # Add all characters that can not be part of computername
         # We need to check the length, build final name here
         $SerialNumberAndManufacturer = "$($Manufacturer)-$($SerialNumber)"
         # If we have all data and its less than the maximum length, use it
