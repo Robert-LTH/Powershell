@@ -1,5 +1,5 @@
-function Main {
-  # Module can be found in 'C:\windows\system32\WindowsPowershell\v1.0\Modules'
+ function Main {
+  # Module 'DnsClient' can be found in 'C:\windows\system32\WindowsPowershell\v1.0\Modules'
   # Simply copy the whole DnsClient-folder to a package and then run this script to set OSDComputerName according to the function Get-ComputerName
   Import-Module ".\DnsClient\DnsClient.psd1"
     try {
