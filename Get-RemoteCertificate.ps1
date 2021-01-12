@@ -8,6 +8,7 @@ function Get-RemoteCertificate {
         [ValidateRange(1,65535)]
         [int]$Port
     )
+    # https://www.sysadmins.lv/blog-en/test-web-server-ssltls-protocol-support-with-powershell.aspx
     process {
         $TcpClient = New-Object Net.Sockets.TcpClient $ComputerName,$Port
         if ($TcpClient) {
