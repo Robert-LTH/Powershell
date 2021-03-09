@@ -2,7 +2,15 @@ function Get-MEMCMHardwareID {
     [OutputType([String])]
     $SystemEnclosureInformation = Get-CimInstance -Namespace "root/cimv2" -ClassName "Win32_SystemEnclosure"
     $SystemEnclosureSerialNumber = $SystemEnclosureInformation | Select-Object -ExpandProperty "SerialNumber"
+    if ($SystemEnclosureSerialNumber -eq 'None') {
+        $SystemEnclosureSerialNumber = $null
+    }
+    
     $SystemEnclosureSMBIOSAssetTag = $SystemEnclosureInformation | Select-Object -ExpandProperty "SMBIOSAssetTag"
+    if ($SystemEnclosureSMBIOSAssetTag -eq 'No Asset Tag') {
+        $SystemEnclosureSMBIOSAssetTag = $null
+    }
+    
     $BaseBoardSerialNumber = Get-CimInstance -Namespace "root/cimv2" -ClassName "Win32_BaseBoard" | Select-Object -ExpandProperty "SerialNumber"
     $BIOSSerialNumber = Get-CimInstance -Namespace "root/cimv2" -ClassName "Win32_BIOS" | Select-Object -ExpandProperty "SerialNumber"
     $SystemEnclosureChassisType = $SystemEnclosureInformation | Select-Object -ExpandProperty "ChassisTypes"
