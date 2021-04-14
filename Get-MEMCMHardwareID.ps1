@@ -12,12 +12,12 @@ function Get-MEMCMHardwareID {
 
     $SystemEnclosureSerialNumber = $SystemEnclosureInformation | Select-Object -ExpandProperty "SerialNumber"
     
-    if ($SystemEnclosureSerialNumber -eq 'None' -or 31 -in $SystemEnclosureChassisType) {
+    if ($SystemEnclosureSerialNumber -eq 'None' -or 31 -in $SystemEnclosureChassisType -or 13 -in $SystemEnclosureChassisType) {
         $SystemEnclosureSerialNumber = $null
     }
     
     $SystemEnclosureSMBIOSAssetTag = $SystemEnclosureInformation | Select-Object -ExpandProperty "SMBIOSAssetTag"
-    if ($SystemEnclosureSMBIOSAssetTag -eq 'No Asset Tag') {
+    if ($SystemEnclosureSMBIOSAssetTag -eq 'No Asset Tag' -or 13 -in $SystemEnclosureChassisType) {
         $SystemEnclosureSMBIOSAssetTag = $null
     }
     
