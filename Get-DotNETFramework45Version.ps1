@@ -1,3 +1,5 @@
+# https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed
+# [System.Runtime.InteropServices.RuntimeInformation]::FrameworkDescription
 function Get-DotNETFramework45Version {
     # https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed#query-the-registry-using-code
     $DotNetFullPath = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
