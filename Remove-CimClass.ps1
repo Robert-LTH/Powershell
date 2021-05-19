@@ -21,7 +21,7 @@ function Remove-CimClass {
                 Write-Error "Failed to delete class: $_"    
             }
         } catch {
-            Write-Error "Failed to create ManagementClass object."
+            Write-Error "Failed to initialize ManagementClass object."
             return
         }
     }
