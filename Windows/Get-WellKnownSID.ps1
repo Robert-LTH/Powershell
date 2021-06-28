@@ -4,6 +4,8 @@ function Get-WellKnownSID {
             Get the SID of a wellknown SID by supplying the name of the SID
         .EXAMPLE
             Get-WellKnownSID -WellKnownSidType 'WorldSid'
+        .EXAMPLE
+            Get-WellKnownSID -WellKnownSidType 'AccountAdministratorSid' -DomainSID (Get-ActiveDirectoryDomainSecurityIdentifier)
         .INPUTS
             $WellKnownSidType - One of System.Security.Principal.WellKnownSidType
             $DomainSID - If needed then this is the SID of the domain the WellKnownSidType belongs to
