@@ -6,10 +6,7 @@ function Get-DotNetCoreInstalledVersion {
     )
     $Arguments = "--list-{0}" -f $Type
     $ExePath | ForEach-Object {
-        if (-not (Test-Path -ErrorAction SilentlyContinue -Path $_)) {
-            Write-Error "Executable does not exist: '$_'"
-        }
-        else {
+        if ((Test-Path -ErrorAction SilentlyContinue -Path $_)) {
             $TemporaryFile = New-TemporaryFile
             $proc = Start-Process -FilePath $_ -ArgumentList $Arguments -Wait -NoNewWindow -RedirectStandardOutput $TemporaryFile -PassThru
             if ($proc.ExitCode -eq 0) {
