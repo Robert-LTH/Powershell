@@ -2,7 +2,7 @@ function Get-DotNetCoreInstalledVersion {
     param(
         [string[]] $ExePath = @("C:\Program Files\dotnet\dotnet.exe","C:\Program Files (x86)\dotnet\dotnet.exe"),
         [ValidateSet("runtimes", "sdks")]
-        [string] $Type
+        [string] $Type = "runtimes"
     )
     $Arguments = "--list-{0}" -f $Type
     $ExePath | ForEach-Object {
