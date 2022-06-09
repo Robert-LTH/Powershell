@@ -1,0 +1,12 @@
+function Find-FileInPathList {
+    param(
+        $Path = $env:PATH,
+        $Filename
+    )
+    $Path -split ";" |
+        Select-Object -Unique | 
+            Where-Object { -not [string]::IsNullOrEmpty($_) -and (Test-Path -Path (Join-Path $_ -ChildPath $Filename) -ErrorAction SilentlyContinue) } |
+                ForEach-Object {
+                    return (Join-Path $_ -ChildPath $Filename)
+                }
+}
