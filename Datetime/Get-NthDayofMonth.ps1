@@ -23,6 +23,7 @@
 #>
 function Get-NthDayofMonth {
     [CmdletBinding()]
+    [OutputType([DateTime])]
     param(
         [ValidateRange(1,9999)]
         [Int] $Year = ([DateTime]::Today).Year,
